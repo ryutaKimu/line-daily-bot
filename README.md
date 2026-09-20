@@ -45,4 +45,13 @@ go test ./...
 
 ## 定期実行
 
-`.github/workflows/daily.yml` が毎日 23:00 UTC（8:00 JST）に `go run .` を実行します。`LINE_TOKEN` と `LINE_TO` はリポジトリの Actions secrets に登録してください。`workflow_dispatch` で手動実行もできます。
+毎日 8:00 JST の実行は [cron-job.org](https://cron-job.org) から GitHub の `workflow_dispatch` API を叩いて行います。`.github/workflows/daily.yml` は `workflow_dispatch` のみをトリガにしており、GitHub の `schedule` は使っていません（発火が遅延・スキップされるため）。
+
+cron-job.org 側の設定:
+
+- URL: `https://api.github.com/repos/<owner>/<repo>/actions/workflows/daily.yml/dispatches`
+- Method: `POST`、Body: `{"ref":"main"}`
+- Header: `Authorization: Bearer <PAT>` / `Accept: application/vnd.github+json`
+- PAT は fine-grained・当リポジトリのみ・`Actions: Read and write` のみ。有効期限切れで無言で止まるため、失敗通知を有効にしておくこと
+
+`LINE_TOKEN` と `LINE_TO` はリポジトリの Actions secrets に登録します。Actions 画面から手動実行も可能です。
