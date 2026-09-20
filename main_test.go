@@ -16,7 +16,7 @@ func TestBuildMessage(t *testing.T) {
 		Title:      "無謀なる旅路",
 		Narrations: []string{"1行目", "2行目", "3行目"},
 	})
-	want := "Episode 第3話\n『無謀なる旅路』\n\n1行目\n2行目\n3行目"
+	want := "鋼の錬金術師 第3話\n『無謀なる旅路』\n\n1行目\n2行目\n3行目"
 	if got != want {
 		t.Errorf("buildMessage() =\n%q\nwant\n%q", got, want)
 	}

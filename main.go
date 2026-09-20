@@ -53,7 +53,7 @@ func fetchNarrationAPI() (NarrationResponse, error) {
 
 func buildMessage(n Narration) string {
 	var sb strings.Builder
-	fmt.Fprintf(&sb, "Episode 第%d話\n", n.Episode)
+	fmt.Fprintf(&sb, "鋼の錬金術師 第%d話\n", n.Episode)
 	fmt.Fprintf(&sb, "『%s』", n.Title)
 	if len(n.Narrations) > 0 {
 		sb.WriteString("\n\n")

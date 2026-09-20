@@ -1,7 +1,7 @@
 name: daily-push
 on:
   schedule:
-    - cron: '0 23 * * *'  # UTC表記。毎日 8:00 JST
+     - cron: '20 20 * * *'  # TODO: 動作確認用の一時設定。確認後 '0 23 * * *'（8:00 JST）に戻す
   workflow_dispatch:       # 手動実行用（テスト時に便利）
 jobs:
   push:
