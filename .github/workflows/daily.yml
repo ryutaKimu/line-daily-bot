@@ -1,0 +1,17 @@
+name: daily-push
+on:
+  schedule:
+    - cron: '0 23 * * *'  # UTC表記。毎日 8:00 JST
+  workflow_dispatch:       # 手動実行用（テスト時に便利）
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - run: go run .
+        env:
+          LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
+          LINE_TO: ${{ secrets.LINE_TO }}
