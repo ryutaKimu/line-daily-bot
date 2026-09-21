@@ -76,11 +76,10 @@ func main() {
 		log.Fatal(err)
 	}
 	body, _ := json.Marshal(map[string]any{
-		"to":       os.Getenv("LINE_TO"),
 		"messages": []map[string]string{{"type": "text", "text": text}},
 	})
 
-	req, _ := http.NewRequest("POST", "https://api.line.me/v2/bot/message/push", bytes.NewReader(body))
+	req, _ := http.NewRequest("POST", "https://api.line.me/v2/bot/message/broadcast", bytes.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+os.Getenv("LINE_TOKEN"))
 
